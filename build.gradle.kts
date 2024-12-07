@@ -1,4 +1,3 @@
-import com.jfrog.bintray.gradle.BintrayExtension
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.api.publish.maven.MavenPublication
@@ -9,7 +8,6 @@ plugins {
     maven
     `maven-publish`
     jacoco
-    id("com.jfrog.bintray") version "1.8.5"
     id("org.jetbrains.dokka") version "0.10.1"
 }
 
@@ -18,6 +16,8 @@ version = "1.1-RELEASE"
 
 repositories {
     jcenter()
+    google()
+    mavenCentral()
 }
 
 dependencies {
@@ -126,21 +126,4 @@ publishing {
             artifact(javadocJar)
         }
     }
-}
-
-bintray {
-    user = System.getenv("BINTRAY_USER")
-    key = System.getenv("BINTRAY_API_KEY")
-    pkg(closureOf<BintrayExtension.PackageConfig> {
-        repo = "maven-public"
-        name = "spring-mediatR"
-        setLicenses("Apache-2.0")
-        vcsUrl = "https://github.com/jkratz55/spring-mediatR"
-        publish = true
-        setPublications("mavenJava")
-        version(closureOf<BintrayExtension.VersionConfig> {
-            this.name = project.version.toString()
-            released = Date().toString()
-        })
-    })
 }
