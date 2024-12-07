@@ -7,8 +7,6 @@ plugins {
     kotlin("jvm") version "2.0.21"
     id("org.jetbrains.dokka") version "1.9.20"
     id("maven-publish")
-    jacoco
-    id("org.jetbrains.dokka") version "0.10.1"
     id("org.jreleaser") version "1.15.0" // or the latest version
 }
 
@@ -17,7 +15,6 @@ version = "1.1-RELEASE"
 
 repositories {
     jcenter()
-    google()
     mavenCentral()
 }
 
